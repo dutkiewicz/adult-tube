@@ -22,3 +22,7 @@ jobs:
       name: "Testing"
       script:
         - pytest
+    - stage:
+      name: "Type checking"
+      script:
+        - mypy --package extractor
