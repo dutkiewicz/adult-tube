@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "adult-tube"
+name = "video-tube"
 version = "0.1.0"
-description = ""
+description = "A clone of popular video tube sites."
 authors = ["Dawid Dutkiewicz <dawid.dutkiewicz@gmail.com>"]
 
 [tool.poetry.dependencies]
