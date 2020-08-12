@@ -1,4 +1,5 @@
 format:
 	black .
-	isort --recursive --profile black .
+	isort --profile black .
 	mypy --package extractor
+	mypy --package web

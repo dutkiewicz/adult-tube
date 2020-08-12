@@ -13,7 +13,7 @@ jobs:
       name: "Formatting"
       script:
         - black --check .
-        - isort --recursive --check-only
+        - isort --check-only
     - stage:
       name: "Linting"
       script:
@@ -26,3 +26,4 @@ jobs:
       name: "Type checking"
       script:
         - mypy --package extractor
+        - mypy --package web
