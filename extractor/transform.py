@@ -4,7 +4,7 @@ from typing import List
 
 from extractor.dto import VideoDTO
 
-VIDEO_ID_PATTERN = re.compile('embed\/(.*?)"')
+VIDEO_ID_PATTERN = re.compile('embed/(.*?)"')
 
 
 def extract_video_id(text: str, pattern: Pattern) -> str:
