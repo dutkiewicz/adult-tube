@@ -22,4 +22,5 @@ class SourceContent:
         return file
 
     def as_stream(self) -> Generator:
-        return self._get_url()
+        for line in self._get_url():
+            yield line.decode()

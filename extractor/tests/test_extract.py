@@ -7,7 +7,7 @@ from extractor.extract import SourceContent
 
 @pytest.fixture
 def response_content():
-    return b"file content from url"
+    return "file content from url"
 
 
 class TestSourceContent:
@@ -22,7 +22,7 @@ class TestSourceContent:
         responses.add(responses.GET, "http://url.com", body=response_content)
 
         content = SourceContent("http://url.com")
-        assert b"".join([bytes(x) for x in content.as_stream()]) == response_content
+        assert "".join([x for x in content.as_stream()]) == response_content
 
     @responses.activate
     def test_returns_temp_file(self, response_content):
@@ -30,4 +30,4 @@ class TestSourceContent:
 
         content = SourceContent("http://url.com")
         with content.as_temp_file() as f:
-            assert f.read() == response_content
+            assert f.read() == response_content.encode("utf-8")
