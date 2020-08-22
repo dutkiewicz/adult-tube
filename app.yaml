@@ -1,0 +1,4 @@
+runtime: python37
+env_variables:
+  PORT: "8080"
+entrypoint: gunicorn -b :$PORT web.wsgi:app

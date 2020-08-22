@@ -1,29 +1,36 @@
 language: python
 python:
-  - "3.7"
-
+- '3.7'
 before_install:
-  - pip install poetry==1.0.9
+- pip install poetry==1.0.9
 install:
-  - poetry install
-
+- poetry install
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_ccef58080008_key -iv $encrypted_ccef58080008_iv
+  -in video-tube-dev-gae-service-account-key.json.enc -out video-tube-dev-gae-service-account-key.json
+  -d
+- poetry export -f requirements.txt -o requirements.txt --without-hashes
 jobs:
   include:
-    - stage: test
-      name: "Formatting"
-      script:
-        - black --check .
-        - isort --check-only
-    - stage:
-      name: "Linting"
-      script:
-        - flake8
-    - stage:
-      name: "Testing"
-      script:
-        - pytest
-    - stage:
-      name: "Type checking"
-      script:
-        - mypy --package extractor
-        - mypy --package web
+  - stage: test
+    name: Formatting
+    script:
+    - black --check .
+    - isort --check-only
+  - stage: test
+    name: Linting
+    script:
+    - flake8
+  - stage: test
+    name: Testing
+    script:
+    - pytest
+  - stage: test
+    name: Type checking
+    script:
+    - mypy --package extractor
+    - mypy --package web
+deploy:
+  provider: gae
+  project: $GAE_PROJECT_ID
+  keyfile: video-tube-dev-gae-service-account-key.json
