@@ -39,3 +39,4 @@ jobs:
       provider: gae
       project: $GAE_PROJECT_ID
       keyfile: video-tube-dev-gae-service-account-key.json
+      skip_cleanup: true
