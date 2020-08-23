@@ -10,6 +10,9 @@ before_deploy:
   -in video-tube-dev-gae-service-account-key.json.enc -out video-tube-dev-gae-service-account-key.json
   -d
 - poetry export -f requirements.txt -o requirements.txt --without-hashes
+stages:
+  - test
+  - deploy
 jobs:
   include:
   - stage: test
@@ -30,7 +33,9 @@ jobs:
     script:
     - mypy --package extractor
     - mypy --package web
-deploy:
-  provider: gae
-  project: $GAE_PROJECT_ID
-  keyfile: video-tube-dev-gae-service-account-key.json
+  - stage: deploy
+    script: skip
+    deploy:
+      provider: gae
+      project: $GAE_PROJECT_ID
+      keyfile: video-tube-dev-gae-service-account-key.json
